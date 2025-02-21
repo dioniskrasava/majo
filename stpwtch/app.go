@@ -82,10 +82,8 @@ func stopwatch(a fyne.App) {
 
 	wdgts.w = a.NewWindow("Stopwatch")
 	wdgts.w.Resize(fyne.NewSize(inf_app.w_a, inf_app.h_a)) // Увеличение размера окна
-	//w.SetFixedSize(true)
 	wdgts.w.CenterOnScreen()
 
-	//var wdgts widgets_app // для получения начальных виджетов
 	widgets_begin()
 
 	wdgts.w.SetContent(wdgts.cont_begin)
@@ -104,12 +102,6 @@ func widgets_begin() {
 	btn_pause := widget.NewButton("      Pause      ", nil)
 	btn_clear := widget.NewButton("      Clear      ", nil)
 
-	// инициализируем массив кнопок для передачи в ф-ю logic_timer
-
-	//var btns witgets_app = witgets_app{btn_str, btn_pause, btn_clear, input}
-	// теперь приходится инициализировать объект нашей суперструктуры частями и в таком
-	// формате. Потому что не все поля структуры известны на момент инициализации
-	// а взаимодействовать уже необходимо
 	wdgts.btn_str = btn_str
 	wdgts.btn_pause = btn_pause
 	wdgts.btn_clear = btn_clear
@@ -283,10 +275,6 @@ func init_cont_add_act() {
 }
 
 func begin_work_db() {
-
-	//-------------------------------------------------------------------
-	//
-
 	// инициализация видов активностей
 	var names_activites []string
 
@@ -304,7 +292,6 @@ func begin_work_db() {
 	)
 	wdgts.ent_activity.PlaceHolder = "Выберите активность"
 	wdgts.ent_activity.Hide()
-	//------------------------------------------------------------------
 
 	//срез видов активностей
 	var activites []Activity

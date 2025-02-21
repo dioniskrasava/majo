@@ -21,7 +21,7 @@ type Lang_data struct {
 }
 
 var eng_l Lang_data = Lang_data{
-	app_menu_name:         "Applications",
+	app_menu_name:         "Utils",
 	app_menu_name_i1:      "Stopwatch",
 	app_menu_name_i2:      "FixAct",
 	sett_menu_name:        "Settings",
@@ -32,7 +32,7 @@ var eng_l Lang_data = Lang_data{
 }
 
 var rus_l Lang_data = Lang_data{
-	app_menu_name:         "Приложения",
+	app_menu_name:         "Инструменты",
 	app_menu_name_i1:      "Секундомер",
 	app_menu_name_i2:      "Активности",
 	sett_menu_name:        "Настройки",
