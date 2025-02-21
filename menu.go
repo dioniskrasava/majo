@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"majo/fixact"
+	stopwatch "majo/stpwtch"
 	"os"
 
 	"fyne.io/fyne/v2"
@@ -81,7 +82,7 @@ func updateMenu() {
 
 func creatingMenuItems() (*fyne.Menu, *fyne.Menu) {
 	// --stopwatch (1-1)
-	app_stopwatch := fyne.NewMenuItem(set_lang.app_menu_name_i1, func() {})
+	app_stopwatch := fyne.NewMenuItem(set_lang.app_menu_name_i1, func() { stopwatch.NewApp(mainApp.a) })
 	app_fixact := fyne.NewMenuItem(set_lang.app_menu_name_i2, func() { fixact.NewApp(mainApp.a) })
 	app_separator := fyne.NewMenuItemSeparator()
 	app_item_quit := fyne.NewMenuItem("Quit", func() { os.Exit(0) })

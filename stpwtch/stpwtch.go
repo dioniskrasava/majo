@@ -1,5 +1,0 @@
-package stpwtch
-
-func main() {
-
-}
