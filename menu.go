@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"majo/fixact"
 	"os"
 
 	"fyne.io/fyne/v2"
@@ -9,17 +10,19 @@ import (
 
 type Lang_data struct {
 	app_menu_name         string
-	app_menu_name_i1      string
-	sett_menu_name        string
+	app_menu_name_i1      string // название первого приложения
+	app_menu_name_i2      string // название второго приложения
+	sett_menu_name        string // меню настроек
 	sett_item1_name       string
 	sett_item2_name       string
-	sett_item1_lang1_name string
+	sett_item1_lang1_name string // первый язык
 	sett_item1_lang2_name string
 }
 
 var eng_l Lang_data = Lang_data{
 	app_menu_name:         "Applications",
 	app_menu_name_i1:      "Stopwatch",
+	app_menu_name_i2:      "FixAct",
 	sett_menu_name:        "Settings",
 	sett_item1_name:       "Language",
 	sett_item2_name:       "Theme",
@@ -30,6 +33,7 @@ var eng_l Lang_data = Lang_data{
 var rus_l Lang_data = Lang_data{
 	app_menu_name:         "Приложения",
 	app_menu_name_i1:      "Секундомер",
+	app_menu_name_i2:      "Активности",
 	sett_menu_name:        "Настройки",
 	sett_item1_name:       "Язык",
 	sett_item2_name:       "Тема",
@@ -77,11 +81,12 @@ func updateMenu() {
 
 func creatingMenuItems() (*fyne.Menu, *fyne.Menu) {
 	// --stopwatch (1-1)
-	app_item1 := fyne.NewMenuItem(set_lang.app_menu_name_i1, func() {})
+	app_stopwatch := fyne.NewMenuItem(set_lang.app_menu_name_i1, func() {})
+	app_fixact := fyne.NewMenuItem(set_lang.app_menu_name_i2, func() { fixact.NewApp(mainApp.a) })
 	app_separator := fyne.NewMenuItemSeparator()
-	app_item_quit := fyne.NewMenuItem("QuВыйти из программыit", func() { os.Exit(0) })
+	app_item_quit := fyne.NewMenuItem("Quit", func() { os.Exit(0) })
 	// application (1)
-	app_menu := fyne.NewMenu(set_lang.app_menu_name, app_item1, app_separator, app_item_quit)
+	app_menu := fyne.NewMenu(set_lang.app_menu_name, app_stopwatch, app_fixact, app_separator, app_item_quit)
 	//-----------------------------------------------------------------------------
 	// --language (2-1)
 	sett_item1 := fyne.NewMenuItem(set_lang.sett_item1_name, func() {})
