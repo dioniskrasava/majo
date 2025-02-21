@@ -4,15 +4,14 @@ import (
 	"fmt"
 	"majo/fixact"
 	stopwatch "majo/stpwtch"
-	"os"
 
 	"fyne.io/fyne/v2"
 )
 
 type Lang_data struct {
-	app_menu_name         string
-	app_menu_name_i1      string // название первого приложения
-	app_menu_name_i2      string // название второго приложения
+	utils_menu_name       string
+	utils_menu_name_i1    string // название первого приложения
+	utils_menu_name_i2    string // название второго приложения
 	sett_menu_name        string // меню настроек
 	sett_item1_name       string
 	sett_item2_name       string
@@ -21,9 +20,9 @@ type Lang_data struct {
 }
 
 var eng_l Lang_data = Lang_data{
-	app_menu_name:         "Utils",
-	app_menu_name_i1:      "Stopwatch",
-	app_menu_name_i2:      "FixAct",
+	utils_menu_name:       "Utils",
+	utils_menu_name_i1:    "Stopwatch",
+	utils_menu_name_i2:    "FixAct",
 	sett_menu_name:        "Settings",
 	sett_item1_name:       "Language",
 	sett_item2_name:       "Theme",
@@ -32,9 +31,9 @@ var eng_l Lang_data = Lang_data{
 }
 
 var rus_l Lang_data = Lang_data{
-	app_menu_name:         "Инструменты",
-	app_menu_name_i1:      "Секундомер",
-	app_menu_name_i2:      "Активности",
+	utils_menu_name:       "Инструменты",
+	utils_menu_name_i1:    "Секундомер",
+	utils_menu_name_i2:    "Активности",
 	sett_menu_name:        "Настройки",
 	sett_item1_name:       "Язык",
 	sett_item2_name:       "Тема",
@@ -60,13 +59,10 @@ func setEngLang() {
 	updateMenu()
 }
 
-func InitMenu(window fyne.Window) *fyne.MainMenu {
-	W = window
-	app_menu, sett_menu := creatingMenuItems()
-	main_menu = fyne.NewMainMenu(app_menu, sett_menu)
-	window.SetMainMenu(main_menu)
-
-	return main_menu
+func InitMainMenu() {
+	utils_menu, sett_menu := creatingMenuItems()
+	main_menu = fyne.NewMainMenu(utils_menu, sett_menu)
+	W.SetMainMenu(main_menu)
 }
 
 // Function to update the menu when language changes
@@ -74,20 +70,20 @@ func updateMenu() {
 	if main_menu == nil || W == nil {
 		return
 	}
-	app_menu, sett_menu := creatingMenuItems()
-	main_menu.Items[0] = app_menu
+	utils_menu, sett_menu := creatingMenuItems()
+	main_menu.Items[0] = utils_menu
 	main_menu.Items[1] = sett_menu
 	main_menu.Refresh()
 }
 
 func creatingMenuItems() (*fyne.Menu, *fyne.Menu) {
-	// --stopwatch (1-1)
-	app_stopwatch := fyne.NewMenuItem(set_lang.app_menu_name_i1, func() { stopwatch.NewApp(mainApp.a) })
-	app_fixact := fyne.NewMenuItem(set_lang.app_menu_name_i2, func() { fixact.NewApp(mainApp.a) })
-	app_separator := fyne.NewMenuItemSeparator()
-	app_item_quit := fyne.NewMenuItem("Quit", func() { os.Exit(0) })
-	// application (1)
-	app_menu := fyne.NewMenu(set_lang.app_menu_name, app_stopwatch, app_fixact, app_separator, app_item_quit)
+
+	utils_stopwatch := fyne.NewMenuItem(set_lang.utils_menu_name_i1, func() { stopwatch.NewApp(mainApp.a) })
+	utils_fixact := fyne.NewMenuItem(set_lang.utils_menu_name_i2, func() { fixact.NewApp(mainApp.a) })
+	utils_separator := fyne.NewMenuItemSeparator()
+
+	// UTILS main-item
+	utils_menu := fyne.NewMenu(set_lang.utils_menu_name, utils_stopwatch, utils_fixact, utils_separator)
 	//-----------------------------------------------------------------------------
 	// --language (2-1)
 	sett_item1 := fyne.NewMenuItem(set_lang.sett_item1_name, func() {})
@@ -103,8 +99,8 @@ func creatingMenuItems() (*fyne.Menu, *fyne.Menu) {
 	// --theme (2-2)
 	sett_item2 := fyne.NewMenuItem(set_lang.sett_item2_name, func() {})
 
-	// settings (2)
+	// SETTINGS main-item
 	sett_menu := fyne.NewMenu(set_lang.sett_menu_name, sett_item1, sett_item2)
 
-	return app_menu, sett_menu
+	return utils_menu, sett_menu
 }
