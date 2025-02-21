@@ -5,13 +5,25 @@ import (
 
 	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
 )
 
 // инициализация НАЧАЛЬНОГО СОСТОЯНИЯ секундомера
 func widgets_begin() {
 
-	input := canvas.NewText("00:00:00:000", color.RGBA{155, 155, 155, 255})
+	bgColor := theme.BackgroundColor()
+	rgbaColor := color.RGBAModel.Convert(bgColor).(color.RGBA)
+
+	var input *canvas.Text
+
+	// ЕСЛИ ЦВЕТ ФОНА БЕЛЫЙ
+	if rgbaColor == (color.RGBA{255, 255, 255, 255}) {
+		input = canvas.NewText("00:00:00:000", color.RGBA{0, 0, 0, 222})
+	} else {
+		input = canvas.NewText("00:00:00:000", color.RGBA{255, 255, 255, 255})
+	}
+
 	input.TextSize = 35 // Увеличение размера шрифта
 
 	btn_str := widget.NewButton("       Start       ", nil)
