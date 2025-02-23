@@ -5,7 +5,6 @@ import (
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
-	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
@@ -30,15 +29,15 @@ func createMainAppAndWindow() {
 
 func welcomeTextPrint() *fyne.Container {
 
-	var welcomeTextLabel *canvas.Text
+	var welcomeTextLabel *widget.RichText
 
 	bgColor := theme.BackgroundColor()
 	rgbaColor := color.RGBAModel.Convert(bgColor).(color.RGBA)
 
 	if rgbaColor == (color.RGBA{255, 255, 255, 255}) {
-		welcomeTextLabel = widget.NewRichText(welcomeText, color.RGBA{0, 0, 0, 222})
+		welcomeTextLabel = richWelcomeText()
 	} else {
-		welcomeTextLabel = canvas.NewText(welcomeText, color.RGBA{255, 255, 255, 255})
+		welcomeTextLabel = richWelcomeText()
 	}
 
 	contentMainWindow := container.NewHBox(welcomeTextLabel)
